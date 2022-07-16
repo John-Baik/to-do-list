@@ -75,6 +75,16 @@ ul.addEventListener('click', (e) => {
     form.setAttribute('name', 'edit');
     const textarea = document.createElement('textarea');
     textarea.setAttribute('name', 'edit-textarea');
+    for (let i = 0; i < object.entry.length; i++) {
+      if (object.entry[i].entryId == id) {
+        textarea.textContent = object.entry[i].entry;
+      }
+    }
+
+    const divArray = document.querySelectorAll('div#entry-id').length;
+    console.log(divArray)
+
+
     form.appendChild(textarea);
     const div = document.createElement('div');
     form.appendChild(div);
@@ -89,6 +99,14 @@ ul.addEventListener('click', (e) => {
     li.appendChild(form);
     section.remove();
     let editForm = document.forms['edit'];
+    let cancel = document.querySelector('.cancel-update');
+    cancel.addEventListener('click', () => {
+      event.preventDefault();
+      form.remove()
+      li.appendChild(original);
+
+    });
+
 
     editForm.addEventListener('submit', (event) => {
       event.preventDefault();
